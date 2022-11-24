@@ -49,8 +49,9 @@ footer p{
 	color: black; 
 	background-color: rgb(43,126,124); 
 	margin:0px;
+	margin-top:10px; 
 	border:none;
-	position: fixed;
+	/*position: fixed;*/
 	width: 100%; 
 	bottom: 0; 
 	padding: 10px;
