@@ -20,7 +20,65 @@
   	</header>
     
 	<h2> Simulation </h2>
-    	<p> Simulation page... </p>
+	<div id="conteneur2">
+    	<h3> Simulation parameters </h3>
+    	<div class="contenu">
+    	<h4>Biological parameters: </h4>
+    	<form action="/my-handling-form-page" method="post">
+ 		<div>
+    		<label for="finalTime">Final time :</label>
+    		<input type="int" id="finalTime" name="finalTime" />
+  		</div>
+  		
+  		<div>
+  		<input type="range" id="replicationRate" name="volume"min="0" max="1" step=0.1>
+  		<label for="replicationRate">Cell replication rate</label>
+		</div>
+		
+		<div>
+  		<input type="range" id="deathRate" name="volume"min="0" max="1" step=0.1>
+  		<label for="deathRate">Cell death rate</label>
+		</div>
+		
+		<div>
+  		<input type="range" id="transformationRate" name="volume"min="0" max="1" step=0.1>
+  		<label for="transformationRate">Cell transformation rate</label>
+		</div>
+		
+		<div>
+  		<input type="range" id="bindingRate" name="volume"min="0" max="1" step=0.1>
+  		<label for="bindingRate">Cell-eDNA binding rate</label>
+		</div>
+		
+		<div>
+  		<input type="range" id="degradationRate" name="volume"min="0" max="1" step=0.1>
+  		<label for="degradationRate">eDNA degradation rate</label>
+		</div>
+		
+		<fieldset>
+    		<legend>SNP</legend>
+
+   		 <div>
+      		<input type="radio" id="no" name="snp" value="no"checked>
+      		<label for="no">No</label>
+    		</div>
+
+    		<div>
+     		<input type="radio" id="yes" name="snp" value="yes">
+      		<label for="yes">Yes</label>
+    		</div>
+		</fieldset>
+
+		
+		<h4>Stress parameters: </h4>
+		
+ 
+  		<div class="button">
+        	<button type="submit">Start simulation</button>
+    		</div>
+	</form>
+	</div>
+    	</div>
     	
     	<footer>
     		<p> Footer... </p>
