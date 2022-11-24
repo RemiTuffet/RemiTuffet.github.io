@@ -44,6 +44,9 @@ h2{
 	color: rgba(216,229,174,255); 
 	border-color: rgba(25,81,77,255); 
 }
+h3{
+	text-align: center;
+}
 footer p{
 	text-align: center; 
 	color: black; 
@@ -56,10 +59,31 @@ footer p{
 	bottom: 0; 
 	padding: 10px;
 }
-p {
-    color: black;
+#conteneur
+{
+    display: flex;
     background-color: rgba(216,229,174,255);
     margin: 10px;
     border: solid; 
     border-color: rgba(216,229,174,255); 
+}
+.element1{
+	width: 60%;
+}
+.element2{
+	width: 40%; 
+}
+table{
+	margin-top: 30px; 
+	margin: 10px; 
+	width: 90%; 
+	float: center; 
+	border: 1px solid black;
+	border-collapse: collapse; 
+}
+td{
+	border: 1px solid black;
+}  
+p {
+    color: black;
 }

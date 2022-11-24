@@ -21,7 +21,8 @@
   	</header>
     
 	<h2> Home </h2>
-	<div id="text">
+	<div id="conteneur">
+	<div class="element1">
     	<p> We used a previous stochastic computational model (<a href="https://journals.asm.org/doi/full/10.1128/mBio.02443-19">Carvalho et al., 2020</a>), complemented with additional genetic elements and insertion sites in bacterial chromosomes. The model is composed of two compartments: bacterial cells (intracellular compartment) and extracellular DNA (extracellular compartment). Bacteria possess 3 insertion sites on their chromosome which can be occupied by two types of DNA each. Insertion sites include three genes, <i>comM</i>, <i>pilT</i> and <i>pho</i>, and can be occupied by their respective wild-type allele (an intact gene) or by their respective AbaR genomic island (<i>comM::AbaR</i>, <i>pilT::AbaR</i> or <i>pho::AbaR</i>) which inactivates the gene on insertion site. Depending on the scenario, one additional site can be occupied by a wild type allele or by of by a single nucleotide polymorphism. Considering all combinations of DNA type, there is a total of 2<sup>4</sup>=16 possible genotypes i. Bacteria uptake eDNA from the extracellular compartment and replace their own using transformation. Bacteria release DNA upon cell lysis which can be enhanced by a stochastic bactericidal stress. </br>
 
 Bacterial growth follows a logistic growth model and the number of replicating cells per genotype i and per time step dt, G<sub>i,t+dt</sub>, is determined using a binomial distribution:
@@ -37,7 +38,7 @@ k<sub>i,t</sub> is the lysis rate of genotype i at time t. I<sub>s,t</sub> is th
 The number of competent cells undergoing a transformation event during a time step C<sub>i,t+dt</sub> is determined using a binomial distribution:
 	$$ C_{i,t+dt} \sim Bin(T_{i,t}\times dt, N_{i,t}) \text{ where}$$
 	$$ T_{i,t}=T_{max,i} \times \frac{\alpha A_{tot,t}}{1+\alpha A_{tot,t}}.$$ 
-T<sub>i,t</sub> is the transformation rate at time t. T<sub>max,i</sub> is the maximal transformation rate of the genotype i. α is the binding rate between cells and eDNA. A<sub>tot,t</sub> is the total number of eDNA at time t. Genotypes with pilT::AbaR have a non-intact <i>pilT</i> gene and cannot uptake eDNA (T<sub>i,t</sub>=0). For the other genotypes, when a transformation event is triggered, a random eDNA molecule is selected in the extracellular compartment, considering the proportion of the different eDNA molecules. Depending on the eDNA molecule j selected and on the integrity of the comM gene in the competent cell, the success probability of the transformation event varies. The transformation success probabilities of couples i j are based on the experimental results of acquisition and removal of DNA fragments of 10-16kb and are reported in table 1. Cells undergoing a transformation event change their genotype accordingly to the DNA type integrated. If the insertion fails, the eDNA is deleted and the genome of the cell remains intact. </br>
+T<sub>i,t</sub> is the transformation rate at time t. T<sub>max,i</sub> is the maximal transformation rate of the genotype i. α is the binding rate between cells and eDNA. A<sub>tot,t</sub> is the total number of eDNA at time t. Genotypes with pilT::AbaR have a non-intact <i>pilT</i> gene and cannot uptake eDNA (T<sub>i,t</sub>=0). For the other genotypes, when a transformation event is triggered, a random eDNA molecule is selected in the extracellular compartment, considering the proportion of the different eDNA molecules. Depending on the eDNA molecule j selected and on the integrity of the comM gene in the competent cell, the success probability of the transformation event varies. The transformation success probabilities of couples i j are based on the experimental results of acquisition and removal of DNA fragments of 10-16kb and are reported in <b>table 1</b>. Cells undergoing a transformation event change their genotype accordingly to the DNA type integrated. If the insertion fails, the eDNA is deleted and the genome of the cell remains intact. </br>
 
 In the extracellular compartment, eDNA is degraded at a constant rate R<sub>j</sub>. The number of degraded eDNA molecules j per time step, D<sub>j,t+dt</sub> is determined using a binomial distribution:
 	$$ D_{j,t+dt} \sim Bin(R_j \times dt, A_{j,t}).$$
@@ -48,12 +49,65 @@ M<sub>input,j</sub> is the number of molecules of eDNA of type j added per time 
 
 Environmental fluctuations are modelled by a stochastic antibiotic stress (defined by a mean frequency f, a mean pike duration d<sub>1</sub> and a mean intensity i<sub>1</sub>)  and environmental switches (defined by a mean duration d<sub>2</sub> and a mean intensity i<sub>2</sub>). Resistance to stochastic antibiotic stress is conferred by AbaRs while SNP confers resistance to environmental switches. Then the probability of a stress 1 to start during a time step is f<sub>1</sub>*dt, and the duration of this stress is given by N(d<sub>1</sub>,d<sub>1</sub>). When a stress 1 starts, another identical stress cannot begin before the first one ended. Stress 2 is built as follows: it starts at some time following N(d<sub>2</sub>,d<sub>2</sub>), its duration follows N(d<sub>2</sub>,d<sub>2</sub>), and the nexte stress pike starts after a no stress period whose duration follows N(d<sub>2</sub>,d<sub>2</sub>). 
     	 </p>
-    	 </di>
-    	 
-    	 </div id="image">
-    	 	<img src="images/model.png" alt="Schematic representation of the model">
     	 </div>
-    	
+    	 <div class="element2">
+    	 <img src="images/model.png" alt="Schematic representation of the model" style="width:100%">
+    	 <h3> Figure: Schematic representation of the model</h3>
+    	 
+    	 <table>
+    	<thead>
+        	<tr>
+            		<th colspan="2">Table 1: Event probabilities</th>
+        	</tr>
+    	</thead>
+    	<tbody>
+        	<tr>
+            		<td>Recipient cell</td>
+            		<td>Event</td>
+            		<td>Success probability</td>
+        	</tr>
+        	<tr>
+            		<td>WT</td><td>AbaR deletion</td><td>1</td>
+        	</tr>
+        	<tr>
+            		<td>WT</td><td>AbaR acquisition</td><td>2.4e<sup>-1</sup></td>
+        	</tr>
+        	<tr>
+            		<td>WT</td><td>SNP</td><td>1</td>
+        	</tr>
+        	<tr>
+            		<td>Δpho</td><td>AbaR deletion</td><td>1</td>
+        	</tr>
+        	<tr>
+            		<td>Δpho</td><td>AbaR acquisition</td><td>2.4e<sup>-1</sup></td>
+        	</tr>
+        	<tr>
+            		<td>Δpho</td><td>SNP</td><td>1</td>
+        	</tr>
+        	<tr>
+            		<td>ΔcomM</td><td>AbaR deletion</td><td>3.1e<sup>-3</sup></td>
+        	</tr>
+        	<tr>
+            		<td>ΔcomM</td><td>AbaR acquisition</td><td>3.4e<sup>-4</sup></td>
+        	</tr>
+        	<tr>
+            		<td>ΔcomM</td><td>SNP</td><td>1.96e<sup>-1</sup></td>
+        	</tr>
+        	<tr>
+            		<td>ΔpilT</td><td>AbaR deletion</td><td>0</td>
+        	</tr>
+        	<tr>
+            		<td>ΔpilT</td><td>AbaR acquisition</td><td>0</td>
+        	</tr>
+        	<tr>
+            		<td>ΔpilT</td><td>SNP</td><td>0</td>
+        	</tr>
+    	</tbody>
+	</table>
+    	 
+    	 </div>
+    	 
+    	</div>
     	<footer>
     		<p> Footer... </p>
     	</footer>
